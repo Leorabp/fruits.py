@@ -1,0 +1,117 @@
+# List Lab Starter
+# Students: fill in code for Series 1–4 below
+
+def series1():
+    # Step 1: Create list
+    fruits = ["Apples", "Pears", "Oranges", "Peaches"]
+    print("Series 1:", fruits)
+
+    # Step 2: Ask user for another fruit and add it to the list
+    new_fruit = input("Enter another fruit: ").capitalize()
+    fruits.append(new_fruit)
+    print("Updated list:", fruits)
+
+    # Step 3: Ask user for a number and display corresponding fruit
+    num = int(input(f"Enter a number between 1 and {len(fruits)}: "))
+    if 1 <= num <= len(fruits):
+        print(f"Fruit number {num} is {fruits[num - 1]}")
+    else:
+        print("That number is out of range!")
+
+    # Step 4: Add another fruit to the beginning using '+'
+    fruits = ["Mango"] + fruits
+    print("Added fruit to beginning with '+':", fruits)
+
+    # Step 5: Add another fruit to the beginning using insert()
+    fruits.insert(0, "Strawberries")
+    print("Added fruit to beginning with insert():", fruits)
+
+    # Step 6: Display all fruits beginning with 'P'
+    print("Fruits that begin with 'P':")
+    for fruit in fruits:
+        if fruit.startswith("P"):
+            print(fruit)
+    
+    # Return fruits for next series
+    return fruits
+
+
+def series2(fruits):
+    print("\nSeries 2:")
+    # Display the list
+    print("Current list:", fruits)
+
+    # Remove the last fruit
+    fruits.pop()
+    print("After removing the last fruit:", fruits)
+
+    # Ask user for a fruit to delete
+    fruit_to_delete = input("Enter a fruit to delete: ").capitalize()
+    if fruit_to_delete in fruits:
+        fruits.remove(fruit_to_delete)
+    else:
+        print(f"{fruit_to_delete} not found in the list.")
+    print("Updated list:", fruits)
+
+    # Bonus: Multiply list by 2
+    fruits *= 2
+    print("Doubled list:", fruits)
+
+    # Keep asking user for a fruit to delete until they enter one that exists
+    while True:
+        fruit_to_delete = input("Enter a fruit to delete (bonus round): ").capitalize()
+        if fruit_to_delete in fruits:
+            # Remove *all* occurrences
+            fruits = [f for f in fruits if f != fruit_to_delete]
+            break
+        else:
+            print("That fruit is not in the list, try again.")
+
+    print("Final list after deletions:", fruits)
+    return fruits
+
+
+def series3(fruits):
+    print("\nSeries 3:")
+    # Make a copy so we don't modify the original while iterating
+    liked_fruits = fruits[:]
+
+    for fruit in fruits:
+        while True:
+            answer = input(f"Do you like {fruit.lower()}? (yes/no): ").strip().lower()
+            if answer == "yes":
+                break
+            elif answer == "no":
+                liked_fruits.remove(fruit)
+                break
+            else:
+                print("Please answer 'yes' or 'no'.")
+
+    print("Fruits you like:", liked_fruits)
+    return liked_fruits
+
+
+def series4(fruits):
+    print("\nSeries 4:")
+    # Create a copy of the list with each fruit name reversed
+    reversed_fruits = [fruit[::-1] for fruit in fruits]
+
+    # Delete the last item from the original list
+    fruits.pop()
+
+    # Display both lists
+    print("Original list (with last item removed):", fruits)
+    print("Copy with reversed fruit names:", reversed_fruits)
+
+    return fruits, reversed_fruits
+
+
+def main():
+    fruits = series1()
+    fruits = series2(fruits)
+    fruits = series3(fruits)
+    series4(fruits)
+
+
+if __name__ == "__main__":
+    main()
